@@ -8,9 +8,6 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class IntroApplication {
-    private BookRepository bookRepository;
-
-
 
     public static void main(String[] args) {
         SpringApplication.run(IntroApplication.class, args);
