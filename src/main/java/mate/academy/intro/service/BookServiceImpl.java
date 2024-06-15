@@ -1,8 +1,8 @@
 package mate.academy.intro.service;
 
+import java.util.List;
 import mate.academy.intro.model.Book;
 import mate.academy.intro.repository.BookRepository;
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +21,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List findAll() {
+    public List<Book> findAll() {
         return bookRepository.findAll();
     }
 }
