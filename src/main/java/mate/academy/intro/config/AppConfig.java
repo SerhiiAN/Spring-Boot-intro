@@ -21,7 +21,8 @@ public class AppConfig {
     @Bean
     public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
+        dataSource.setDriverClassName(environment
+                .getProperty("spring.datasource.driver-class-name"));
         dataSource.setUrl(environment.getProperty("spring.datasource.url"));
         dataSource.setUsername(environment.getProperty("spring.datasource.username"));
         dataSource.setPassword(environment.getProperty("spring.datasource.password"));
@@ -34,7 +35,6 @@ public class AppConfig {
         localSessionFactoryBean.setDataSource(getDataSource());
 
         Properties properties = new Properties();
-       // properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("show_sql", environment.getProperty("spring.jpa.show-sql"));
         properties.put("hibernate.hbm2ddl.auto", environment
                 .getProperty("spring.jpa.hibernate.ddl-auto"));
