@@ -1,10 +1,10 @@
 package mate.academy.intro.repository;
 
+import java.util.List;
 import mate.academy.intro.model.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.mapping.List;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,11 +41,14 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public List findAll() {
+    public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
             Query<Book> getAllBooksQuery = session.createQuery(
                     "from Book", Book.class);
-            return (List) getAllBooksQuery.getResultList();
+            return getAllBooksQuery.getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Can`t find all books in DB", e);
+
         }
     }
 }
