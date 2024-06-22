@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: rename-column-cover_image-to-coverImage
+      author: serhii
+      changes:
+        - renameColumn:
+            oldColumnName: cover_image
+            newColumnName: coverImage
+            tableName: books
+            columnDataType: varchar(255)
+
