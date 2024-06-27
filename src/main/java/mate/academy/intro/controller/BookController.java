@@ -71,8 +71,7 @@ public class BookController {
 
     @GetMapping("/search")
     @Operation(summary = "Search books", description = "Search for books based on various criteria")
-    public List<BookDto> search(BookSearchParameters searchParameters,
-                                @ParameterObject @PageableDefault Pageable pageable) {
+    public List<BookDto> search(BookSearchParameters searchParameters, Pageable pageable) {
         return bookService.search(searchParameters);
     }
 }
