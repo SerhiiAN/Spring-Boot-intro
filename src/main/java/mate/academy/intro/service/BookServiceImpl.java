@@ -1,6 +1,5 @@
 package mate.academy.intro.service;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.intro.dto.BookDto;
@@ -11,6 +10,7 @@ import mate.academy.intro.mapper.BookMapper;
 import mate.academy.intro.model.Book;
 import mate.academy.intro.repository.book.BookRepository;
 import mate.academy.intro.repository.book.BookSpecificationBuilder;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -55,9 +55,9 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
-    public List<BookDto> search(BookSearchParameters parameters) {
+    public List<BookDto> search(BookSearchParameters parameters, Pageable pageable) {
         Specification<Book> bookSpecification = bookSpecificationBuilder.build(parameters);
-        return bookRepository.findAll(bookSpecification)
+        return bookRepository.findAll(bookSpecification, pageable)
                 .stream()
                 .map(bookMapper::toDto)
                 .toList();
