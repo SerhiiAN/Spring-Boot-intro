@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
-import java.awt.print.Pageable;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.intro.dto.BookDto;
@@ -12,6 +11,7 @@ import mate.academy.intro.dto.BookSearchParameters;
 import mate.academy.intro.dto.CreateBookRequestDto;
 import mate.academy.intro.service.BookService;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -71,7 +71,8 @@ public class BookController {
 
     @GetMapping("/search")
     @Operation(summary = "Search books", description = "Search for books based on various criteria")
-    public List<BookDto> search(BookSearchParameters searchParameters, Pageable pageable) {
-        return bookService.search(searchParameters);
+    public List<BookDto> search(BookSearchParameters searchParameters,
+                       @ParameterObject @PageableDefault(size = 30, page = 0) Pageable pageable) {
+        return bookService.search(searchParameters, pageable);
     }
 }
