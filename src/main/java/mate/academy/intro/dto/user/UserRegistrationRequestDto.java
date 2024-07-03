@@ -7,7 +7,7 @@ import mate.academy.intro.validation.FieldMatch;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-@FieldMatch(first = "password", second = "repeatJPassword",
+@FieldMatch(first = "password", second = "repeatPassword",
         message = "The password fields must match")
 public class UserRegistrationRequestDto {
     @NotBlank(message = "Email cannot be blank")
