@@ -24,7 +24,8 @@ public class CreateBookRequestDto {
             message = "The price must be more than 0")
     private BigDecimal price;
     @NotBlank(message = "The cover image is mandatory.")
-    @Pattern(regexp = "^(http(s?):)([/|.|\\\\w|\\\\s|-])*\\\\.(?:jpg|jpeg|gif|png)$",
+    @Pattern(regexp = "^(https?:\\/\\/.*\\.(?:png|jpg|jpeg|gif))$",
             message = "not the correct format for cover image")
+
     private String coverImage;
 }
