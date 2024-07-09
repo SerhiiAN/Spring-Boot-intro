@@ -8,15 +8,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class AuthenticationService {
-    private JwtUtil jwtUtil;
-    private AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
 
     public UserLoginResponseDto authenticate(UserLoginRequestDto requestDto) {
         final Authentication authentication = authenticationManager.authenticate(
-          new UsernamePasswordAuthenticationToken(requestDto.email(), requestDto.password())
+            new UsernamePasswordAuthenticationToken(requestDto.email(), requestDto.password())
         );
 
         String token = jwtUtil.generateToken(authentication.getName());
