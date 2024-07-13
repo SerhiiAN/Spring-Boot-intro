@@ -2,7 +2,7 @@ package mate.academy.intro.dto.book;
 
 import java.math.BigDecimal;
 
-public record BookDtoWithoutCategoryIds (
+public record BookDtoWithoutCategoryIds(
         Long id,
         String title,
         String author,
