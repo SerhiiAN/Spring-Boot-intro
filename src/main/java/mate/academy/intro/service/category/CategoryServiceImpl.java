@@ -8,6 +8,7 @@ import mate.academy.intro.exception.EntityNotFoundException;
 import mate.academy.intro.mapper.CategoryMapper;
 import mate.academy.intro.model.Category;
 import mate.academy.intro.repository.category.CategoryRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public List findAll() {
-        return categoryRepository.findAll()
+    public List<CategoryDto> findAll(Pageable pageable) {
+        return categoryRepository.findAll(pageable)
                 .stream()
                 .map(categoryMapper::toDto).toList();
     }

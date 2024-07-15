@@ -1,5 +1,6 @@
 package mate.academy.intro.mapper;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 import mate.academy.intro.config.MapperConfig;
 import mate.academy.intro.dto.book.BookDto;
@@ -27,5 +28,17 @@ public interface BookMapper {
                 book.getCategories().stream()
                         .map(Category::getId)
                         .collect(Collectors.toSet()));
+    }
+
+    @AfterMapping
+    default void setCategories(@MappingTarget Book book, CreateBookRequestDto requestDto) {
+        Set<Category> categories = requestDto.getCategoryIds().stream()
+                .map(id -> {
+                    Category category = new Category();
+                    category.setId(id);
+                    return category;
+                })
+                .collect(Collectors.toSet());
+        book.setCategories(categories);
     }
 }
