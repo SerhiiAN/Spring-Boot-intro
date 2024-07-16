@@ -2,7 +2,6 @@ package mate.academy.intro.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import java.util.List;
@@ -36,7 +35,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
     private final BookService bookService;
 
-    @Transactional
     @PreAuthorize("hasRole('USER')")
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
@@ -45,7 +43,6 @@ public class BookController {
         return bookService.findAll(pageable);
     }
 
-    @Transactional
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/{id}")
     @Operation(summary = "Get book by ID", description = "Get details of a book by its ID")
@@ -79,7 +76,6 @@ public class BookController {
         bookService.deleteById(id);
     }
 
-    @Transactional
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/search")
     @Operation(summary = "Search books", description = "Search for books based on various criteria")

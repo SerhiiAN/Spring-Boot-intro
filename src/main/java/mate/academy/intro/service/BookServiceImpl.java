@@ -1,5 +1,6 @@
 package mate.academy.intro.service;
 
+import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.intro.dto.book.BookDto;
@@ -28,12 +29,14 @@ public class BookServiceImpl implements BookService {
         return bookMapper.toDto(bookRepository.save(book));
     }
 
+    @Transactional
     @Override
     public List<BookDto> findAll(Pageable pageable) {
         return bookRepository.findAll().stream()
                 .map(bookMapper::toDto).toList();
     }
 
+    @Transactional
     @Override
     public BookDto getBookById(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(
@@ -56,6 +59,7 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
+    @Transactional
     public List<BookDto> search(BookSearchParameters parameters, Pageable pageable) {
         Specification<Book> bookSpecification = bookSpecificationBuilder.build(parameters);
         return bookRepository.findAll(bookSpecification, pageable)
@@ -64,6 +68,7 @@ public class BookServiceImpl implements BookService {
                 .toList();
     }
 
+    @Transactional
     @Override
     public List<BookDtoWithoutCategoryIds> findByCategoryId(Long id, Pageable pageable) {
         return bookRepository.findAllByCategoryId(id, pageable)

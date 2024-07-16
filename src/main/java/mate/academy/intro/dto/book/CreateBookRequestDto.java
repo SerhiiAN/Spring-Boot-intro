@@ -28,5 +28,6 @@ public class CreateBookRequestDto {
     @Pattern(regexp = "^(https?:\\/\\/.*\\.(?:png|jpg|jpeg|gif))$",
             message = "not the correct format for cover image")
     private String coverImage;
+    @NotNull(message = "At least one category ID is required.")
     private Set<Long> categoryIds;
 }
