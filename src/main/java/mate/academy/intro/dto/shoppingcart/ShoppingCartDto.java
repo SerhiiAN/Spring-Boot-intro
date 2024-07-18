@@ -1,4 +1,4 @@
-package mate.academy.intro.dto.shoppingсart;
+package mate.academy.intro.dto.shoppingcart;
 
 import java.util.List;
 

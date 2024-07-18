@@ -1,8 +1,9 @@
 package mate.academy.intro.mapper;
 
 import mate.academy.intro.config.MapperConfig;
-import mate.academy.intro.dto.shoppingсart.CartItemDto;
-import mate.academy.intro.dto.shoppingсart.CreateCartItemRequestDto;
+import mate.academy.intro.dto.shoppingcart.CartItemDto;
+import mate.academy.intro.dto.shoppingcart.CreateCartItemRequestDto;
+import mate.academy.intro.dto.shoppingcart.UpdateCartItemRequestDto;
 import mate.academy.intro.model.Book;
 import mate.academy.intro.model.CartItem;
 import org.mapstruct.Mapper;
@@ -19,8 +20,7 @@ public interface CartItemMapper {
     @Mapping(target = "book", source = "bookId", qualifiedByName = "bookFromId")
     CartItem toModel(CreateCartItemRequestDto requestDto);
 
-    @Mapping(target = "book", source = "bookId", qualifiedByName = "bookFromId")
-    void updateModel(CreateCartItemRequestDto requestDto, @MappingTarget CartItem cartItem);
+    void updateModel(UpdateCartItemRequestDto requestDto, @MappingTarget CartItem cartItem);
 
     @Named("bookFromId")
     default Book bookFromId(Long id) {
