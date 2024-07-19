@@ -30,7 +30,6 @@ public class BookServiceImpl implements BookService {
         return bookMapper.toDto(bookRepository.save(book));
     }
 
-    @Transactional
     @Override
     public List<BookDto> findAll(Pageable pageable) {
         return bookRepository.findAll().stream()
@@ -60,6 +59,7 @@ public class BookServiceImpl implements BookService {
         bookRepository.deleteById(id);
     }
 
+    @Override
     public List<BookDto> search(BookSearchParameters parameters, Pageable pageable) {
         Specification<Book> bookSpecification = bookSpecificationBuilder.build(parameters);
         return bookRepository.findAll(bookSpecification, pageable)

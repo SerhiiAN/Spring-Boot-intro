@@ -18,7 +18,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -79,8 +78,10 @@ public class BookController {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/search")
     @Operation(summary = "Search books", description = "Search for books based on various criteria")
-    public List<BookDto> search(@ModelAttribute BookSearchParameters searchParameters,
-                       @ParameterObject @PageableDefault(size = 30, page = 0) Pageable pageable) {
+    public List<BookDto> search(
+            @ParameterObject @PageableDefault(size = 30, page = 0)
+            BookSearchParameters searchParameters,
+                        Pageable pageable) {
         return bookService.search(searchParameters, pageable);
     }
 }
