@@ -14,7 +14,6 @@ import mate.academy.intro.model.CartItem;
 import mate.academy.intro.model.ShoppingCart;
 import mate.academy.intro.model.User;
 import mate.academy.intro.repository.shoppingcart.ShoppingCartRepository;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -64,7 +63,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCartDto getCartItemsByUserId(Long userId, Pageable pageable) {
+    public ShoppingCartDto getCartItemsByUserId(Long userId) {
         ShoppingCart shoppingCart = getShoppingCartByUserId(userId);
         return shoppingCartMapper.toShoppingCartDto(shoppingCart);
     }
