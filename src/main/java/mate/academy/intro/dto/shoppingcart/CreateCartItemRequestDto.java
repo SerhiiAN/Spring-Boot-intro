@@ -1,12 +1,11 @@
 package mate.academy.intro.dto.shoppingcart;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public record CreateCartItemRequestDto(
-        @NotNull(message = "Book ID is mandatory.")
+        @Positive(message = "Book ID must be a positive number.")
         Long bookId,
-        @NotNull(message = "Quantity is mandatory.")
         @Min(value = 1, message = "Quantity must be at least 1.")
         int quantity
 ) {
