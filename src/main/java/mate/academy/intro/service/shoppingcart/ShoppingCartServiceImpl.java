@@ -13,7 +13,7 @@ import mate.academy.intro.model.Book;
 import mate.academy.intro.model.CartItem;
 import mate.academy.intro.model.ShoppingCart;
 import mate.academy.intro.model.User;
-import mate.academy.intro.repository.shopping.cart.ShoppingCartRepository;
+import mate.academy.intro.repository.shoppingcart.ShoppingCartRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final ShoppingCartMapper shoppingCartMapper;
     private final CartItemMapper cartItemMapper;
 
+    @Transactional
     @Override
     public void addNewShoppingCart(User user) {
         Set<CartItem> cartItems = new HashSet<>();
@@ -62,9 +63,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return shoppingCart;
     }
 
-    @Transactional
+
     @Override
-    public ShoppingCartDto getCartItemsByUserId(Long userId, Pageable pageable) {
+    public ShoppingCartDto getCartItemsByUserId(Long userId) {
         ShoppingCart shoppingCart = getShoppingCartByUserId(userId);
         return shoppingCartMapper.toShoppingCartDto(shoppingCart);
     }

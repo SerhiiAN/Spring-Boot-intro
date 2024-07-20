@@ -9,7 +9,7 @@ import mate.academy.intro.dto.shoppingcart.UpdateCartItemRequestDto;
 import mate.academy.intro.exception.EntityNotFoundException;
 import mate.academy.intro.mapper.CartItemMapper;
 import mate.academy.intro.model.CartItem;
-import mate.academy.intro.repository.shopping.cart.CartItemRepository;
+import mate.academy.intro.repository.shoppingcart.CartItemRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 

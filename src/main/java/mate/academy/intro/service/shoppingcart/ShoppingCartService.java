@@ -10,7 +10,7 @@ public interface ShoppingCartService {
 
     ShoppingCartDto addOrUpdateCartItem(Long id, CreateCartItemRequestDto requestDto);
 
-    ShoppingCartDto getCartItemsByUserId(Long userId, Pageable pageable);
+    ShoppingCartDto getCartItemsByUserId(Long userId);
 
     void cleanShoppingCart(Long shoppingCartId);
 }
