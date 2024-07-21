@@ -63,9 +63,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return shoppingCart;
     }
 
-
     @Override
-    public ShoppingCartDto getCartItemsByUserId(Long userId) {
+    public ShoppingCartDto getCartItemsByUserId(Long userId, Pageable pageable) {
         ShoppingCart shoppingCart = getShoppingCartByUserId(userId);
         return shoppingCartMapper.toShoppingCartDto(shoppingCart);
     }
@@ -76,7 +75,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartId)
                 .orElseThrow(() -> new EntityNotFoundException("Shopping cart not found with id: "
                         + shoppingCartId));
-        shoppingCart.setCartItems(new HashSet<>());
+        shoppingCart.getCartItems().clear();
         shoppingCartRepository.save(shoppingCart);
     }
 }

@@ -3,6 +3,7 @@ package mate.academy.intro.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.intro.dto.order.CreateOrderRequestDto;
 import mate.academy.intro.dto.order.OrderDto;
@@ -15,9 +16,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Order management", description = "Endpoints for managing orders")
 @RequiredArgsConstructor
@@ -56,7 +62,7 @@ public class OrderController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("/{orderId}/items{orderItemId}")
+    @GetMapping("/{orderId}/items/{orderItemId}")
     @Operation(summary = "Get item by id", description = "Get item by id")
     public OrderItemDto getOrderItem(@PathVariable Long orderId,
                                      @PathVariable Long orderItemId,
@@ -69,7 +75,7 @@ public class OrderController {
     @PatchMapping("/{id}")
     @Operation(summary = "Update status for order", description = "Update status for order")
     public OrderDto updateStatusForOrder(@PathVariable Long id,
-                                       @RequestBody UpdateOrderStatusRequestDto requestDto) {
+                                       @RequestBody @Valid UpdateOrderStatusRequestDto requestDto) {
         return orderService.updateOrderStatus(id, requestDto);
     }
 }

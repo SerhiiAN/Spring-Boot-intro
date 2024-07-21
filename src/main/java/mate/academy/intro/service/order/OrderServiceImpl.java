@@ -1,6 +1,10 @@
 package mate.academy.intro.service.order;
 
 import jakarta.transaction.Transactional;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import mate.academy.intro.dto.order.CreateOrderRequestDto;
 import mate.academy.intro.dto.order.OrderDto;
@@ -18,10 +22,6 @@ import mate.academy.intro.repository.shoppingcart.ShoppingCartRepository;
 import mate.academy.intro.service.shoppingcart.ShoppingCartService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +61,7 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.toOrderDto(savedOrder);
     }
 
+    @Transactional
     @Override
     public List<OrderDto> getAllOrders(Long userId, Pageable pageable) {
         List<Order> orders = orderRepository.findOrdersByUserId(userId, pageable);
@@ -70,7 +71,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderItemDto> getAllOrderItemsByOrderId(Long orderId,Long userId, Pageable pageable) {
+    public List<OrderItemDto> getAllOrderItemsByOrderId(Long orderId,
+                                                        Long userId,
+                                                        Pageable pageable) {
         if (!orderRepository.existsByIdAndUserId(orderId, userId)) {
             throw new EntityNotFoundException("Order not found with id: "
                     + orderId + " for user with id: " + userId);
@@ -82,15 +85,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderItemDto getOrderItemByOrderIdAndOrderItemId(Long orderId, Long orderItemId, Long userId) {
+    public OrderItemDto getOrderItemByOrderIdAndOrderItemId(Long orderId,
+                                                            Long orderItemId,
+                                                            Long userId) {
         if (!orderRepository.existsByIdAndUserId(orderId, userId)) {
             throw new EntityNotFoundException("Order not found with id: "
                     + orderId + " for user with id: " + userId);
         }
         OrderItem orderItem = orderItemRepository.findById(orderItemId)
-                .orElseThrow(() -> new EntityNotFoundException("Order not found with id: " + orderItemId));
+                .orElseThrow(() -> new EntityNotFoundException("Order not found with id: "
+                        + orderItemId));
         if (!orderItem.getOrder().getId().equals(orderId)) {
-            throw new EntityNotFoundException("Order with id: " + orderId + " for user with id" + userId);
+            throw new EntityNotFoundException("Order with id: " + orderId
+                    + " for user with id" + userId);
         }
         return orderMapper.toOrderItemDto(orderItem);
     }
