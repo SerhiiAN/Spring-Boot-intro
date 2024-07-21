@@ -41,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.toOrderDto(orderRepository.save(order));
     }
 
+    @Transactional
     @Override
     public List<OrderDto> getAllOrders(Long userId, Pageable pageable) {
         return orderMapper.toOrderDtoList(orderRepository.findAllByUserId(userId, pageable));
