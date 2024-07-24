@@ -78,8 +78,10 @@ public class BookController {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/search")
     @Operation(summary = "Search books", description = "Search for books based on various criteria")
-    public List<BookDto> search(BookSearchParameters searchParameters,
-                       @ParameterObject @PageableDefault(size = 30, page = 0) Pageable pageable) {
+    public List<BookDto> search(
+            @ParameterObject @PageableDefault(size = 30, page = 0)
+            BookSearchParameters searchParameters,
+                        Pageable pageable) {
         return bookService.search(searchParameters, pageable);
     }
 }

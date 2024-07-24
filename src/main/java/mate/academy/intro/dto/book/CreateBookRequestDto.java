@@ -2,10 +2,12 @@ package mate.academy.intro.dto.book;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.Set;
 import lombok.Data;
 
 @Data
@@ -26,6 +28,7 @@ public class CreateBookRequestDto {
     @NotBlank(message = "The cover image is mandatory.")
     @Pattern(regexp = "^(https?:\\/\\/.*\\.(?:png|jpg|jpeg|gif))$",
             message = "not the correct format for cover image")
-
     private String coverImage;
+    @NotEmpty(message = "At least one category ID is required.")
+    private Set<Long> categoryIds;
 }
