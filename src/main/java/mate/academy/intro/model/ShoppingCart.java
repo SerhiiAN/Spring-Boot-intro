@@ -35,4 +35,8 @@ public class ShoppingCart {
     private Set<CartItem> cartItems = new HashSet<>();
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private boolean isDeleted = false;
+
+    public void clearCart() {
+        cartItems.clear();
+    }
 }
