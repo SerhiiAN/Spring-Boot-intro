@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.intro.dto.order.CreateOrderRequestDto;
 import mate.academy.intro.dto.order.OrderDto;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/orders")
 public class OrderController {
     private final OrderService orderService;
 
@@ -54,9 +55,9 @@ public class OrderController {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/{orderId}/items")
     @Operation(summary = "Get all items", description = "Get a list of all available items")
-    public List<OrderItemDto> getAllOrderItems(@PathVariable Long orderId,
-                                               Authentication authentication,
-                                               Pageable pageable) {
+    public Set<OrderItemDto> getAllOrderItems(@PathVariable Long orderId,
+                                              Authentication authentication,
+                                              Pageable pageable) {
         User user = (User) authentication.getPrincipal();
         return orderService.getAllOrderItemsByOrderId(orderId, user.getId(), pageable);
     }
