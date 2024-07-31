@@ -1,4 +1,5 @@
 package mate.academy.intro.controller;
+
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -7,13 +8,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.sql.DataSource;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.sql.DataSource;
 import lombok.SneakyThrows;
 import mate.academy.intro.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.intro.dto.category.CategoryDto;
@@ -201,16 +202,16 @@ class CategoryControllerTest {
                 2L,
                 "Book Title 2",
                 "Author 2",
-                "ISBN0002",
+                "9781234567892",
                 new BigDecimal("29.99"),
-                "example.com/cover2.jpg"));
+                "https://example.com/cover2.jpg"));
         bookDtoWithoutCategoryIds.add(new BookDtoWithoutCategoryIds(
                 5L,
                 "Book Title 5",
                 "Author 5",
-                "ISBN0005",
+                "9781234567895",
                 BigDecimal.valueOf(59.99),
-                "example.com/cover5.jpg"));
+                "https://example.com/cover5.jpg"));
         return bookDtoWithoutCategoryIds;
     }
 }
