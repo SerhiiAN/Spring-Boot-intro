@@ -30,10 +30,8 @@ class CategoryServiceImplTest {
     private CategoryRepository categoryRepository;
     @Mock
     private CategoryMapper categoryMapper;
-
     @InjectMocks
     private CategoryServiceImpl categoryService;
-
     private CreateCategoryRequestDto requestDto;
     private Category categoryOne;
     private Category categoryTwo;
