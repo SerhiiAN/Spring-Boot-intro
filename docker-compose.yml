@@ -6,11 +6,11 @@ services:
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - ${POSTGRES_LOCAL_PORT}:${POSTGRES_DOCKER_PORT}
+      - ${MYSQL_LOCAL_PORT}:${MYSQL_DOCKER_PORT}
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      POSTGRES_PASSWORD: ${MYSQL_PASSWORD}
+      POSTGRES_DB: ${MYSQL_DATABASE}
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres"]
       interval: 30s
@@ -28,9 +28,8 @@ services:
       - ${DEBUG_PORT}:${DEBUG_PORT}
     environment:
       SPRING_APPLICATION_jSON: '{
-      "spring.datasource.url" : "jdbc:postgresql://postgresdb:${POSTGRES_DOCKER_PORT}/${POSTGRES_DATABASE}",
-      "spring.datasource.username" : "${POSTGRES_USER}",
-      "spring.datasource.password" : "${POSTGRES_PASSWORD}",
-      "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect"
-      }'
+      "spring.datasource.url" : "jdbc:mysql://${MYSQL_ENDPOINTS}:${MYSQL_DOCKER_PORT}/${MYSQL_DATABASE}",
+      "spring.datasource.username" : "${MYSQL_USER}",
+      "spring.datasource.password" : "${MYSQL_PASSWORD}",
+      "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQLDialect"}'
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:${DEBUG_PORT}"

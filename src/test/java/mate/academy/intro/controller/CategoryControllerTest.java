@@ -37,7 +37,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CategoryControllerTest {
+class awsCategoryControllerTest {
     protected static MockMvc mockMvc;
 
     @Autowired
