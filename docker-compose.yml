@@ -1,24 +1,7 @@
 version: "3.8"
 
 services:
-  postgresdb:
-    image: postgres
-    restart: unless-stopped
-    env_file: ./.env
-    ports:
-      - ${MYSQL_LOCAL_PORT}:${MYSQL_DOCKER_PORT}
-    environment:
-      MYSQL_USER: ${MYSQL_USER}
-      POSTGRES_PASSWORD: ${MYSQL_PASSWORD}
-      POSTGRES_DB: ${MYSQL_DATABASE}
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres"]
-      interval: 30s
-      timeout: 30s
-      retries: 3
   app:
-    depends_on:
-      - postgresdb
     restart: on-failure
     image: posts-service
     build: .
