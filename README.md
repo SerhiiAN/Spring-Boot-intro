@@ -44,17 +44,17 @@ To run the project, follow these steps:
    In the .env file, provide the necessary environment variables related to the database and Docker. Below is an example configuration:
 
    ```plaintext
-   MYSQLDB_DATABASE=library
-   MYSQLDB_USER=admin
-   MYSQLDB_PASSWORD=root
-   MYSQLDB_ROOT_PASSWORD=root
-   MYSQLDB_LOCAL_PORT=3307
-   MYSQLDB_DOCKER_PORT=3306
-   SPRING_LOCAL_PORT=8081
+   MYSQL_USER=admin
+   MYSQL_PASSWORD=hdnctwbd6Tvswkk
+   MYSQL_DATABASE=bookstore
+   MYSQL_LOCAL_PORT=3307
+   MYSQL_DOCKER_PORT=3306
+   MYSQL_ENDPOINTS=bookstore-instance.cl66w0qu6d4i.us-east-1.rds.amazonaws.com
+   SPRING_LOCAL_PORT=8088
    SPRING_DOCKER_PORT=8080
    DEBUG_PORT=5005
-Build the Application:
-Run the command mvn clean package to build the application.
+   Build the Application:
+   Run the command mvn clean package to build the application.
 
 Run the Docker Container:
 Execute the command docker-compose build to build the Docker container.
