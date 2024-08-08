@@ -15,6 +15,7 @@ This API allows you to perform a variety of operations, such as:
 
 Additionally, the API features robust user authentication and authorization mechanisms, allowing you to control access to specific endpoints based on user roles, ensuring secure and controlled interactions with the system.
 
+---
 ## 🛠️ Technologies Used
 - **Java**: The primary programming language for the entire application.
 - **Spring Boot**: Framework enabling rapid and efficient development of Spring-based applications.
@@ -30,7 +31,7 @@ Additionally, the API features robust user authentication and authorization mech
 - **JUnit 5**: Framework for writing unit tests.
 - **Mockito**: Framework for creating mocks and stubs in tests.
 - **Swagger**: Tool for generating interactive API documentation.
-
+---
 ## 🚀 Running the Project
 To run the project, follow these steps:
 
@@ -68,82 +69,100 @@ Testing Admin and Standard User Features:
 To test admin features, use the following login credentials:
 
 Email: admin@example.com
-Password: 123123123
+Password: 123456789
 For testing standard user features, use:
 
 Email: user@example.com
-Password: 123123123
-📊 Entity Structure and Relations Diagram
+Password: 123456789
+---
+# 📊 Entity Structure and Relations Diagram
 Below is the entity structure and relations diagram for the "Bookstore Online" project, illustrating connections between various entities and their fields.
-
-
-📚 Project Structure
-Controllers
-AuthenticationController: Handles login and registration requests for users.
-BookController: Manages operations related to books, such as adding, updating, and deleting.
-CategoryController: Manages operations related to book categories, such as adding, updating, and deleting.
-OrderController: Handles operations related to orders, such as placing new orders and updating order status.
-ShoppingCartController: Manages operations on shopping carts, such as adding and removing items from the cart.
-DTOs (Data Transfer Objects)
-All DTOs, such as BookDto, CategoryDto, OrderDto, etc., used for transferring data between controllers and services.
-Mappers
-Mappers, such as BookMapper, CategoryMapper, etc., responsible for mapping DTO objects to entities and vice versa.
-Services
-Services, such as BookService, CategoryService, OrderService, ShoppingCartService, containing business logic and used by controllers.
-Repositories
-Repositories, such as BookRepository, CategoryRepository, OrderRepository, ShoppingCartRepository, responsible for communication with the database.
-Exceptions
-Exceptions, such as CustomGlobalExceptionHandler, EntityNotFoundException, handling custom errors and exceptions in the application.
-Security
-Security components, such as JwtAuthenticationFilter, CustomUserDetailsService, JwtUtil, SecurityConfig, handling user authentication and authorization.
-Configuration
-Application configurations, such as application.properties, liquibase.properties, containing application settings.
-Database Scripts
-Initialization and update scripts for the database used by Liquibase, such as .yaml and .sql files.
-Tests
-Unit and integration tests, such as BookControllerTest, BookServiceTest, BookRepositoryTest, ensuring the correctness of individual components of the application.
-Infrastructure
-Docker configurations, such as Dockerfile, docker-compose.yml, used for running the application in Docker containers.
-Other
-Miscellaneous files and components, such as CoverImageValidator, EmailValidator, etc., which are part of the application.
-⭐ Features Overview
-Authentication Management Endpoints
-Available for Everybody:
+![alt text](src/main/resources/images/Untitled.png)
+___
+# 📚 Project Structure
+## Controllers
+- AuthenticationController: Handles login and registration requests for users.
+- BookController: Manages operations related to books, such as adding, updating, and deleting.
+- CategoryController: Manages operations related to book categories, such as adding, updating, and deleting.
+- OrderController: Handles operations related to orders, such as placing new orders and updating order status.
+- ShoppingCartController: Manages operations on shopping carts, such as adding and removing items from the cart.
+## DTOs (Data Transfer Objects)
+- All DTOs, such as BookDto, CategoryDto, OrderDto, etc., used for transferring data between controllers and services.
+## Mappers
+- Mappers, such as BookMapper, CategoryMapper, etc., responsible for mapping DTO objects to entities and vice versa.
+## Services
+- Services, such as BookService, CategoryService, OrderService, ShoppingCartService, containing business logic and used by controllers.
+## Repositories
+- Repositories, such as BookRepository, CategoryRepository, OrderRepository, ShoppingCartRepository, responsible for communication with the database.
+## Exceptions
+- Exceptions, such as CustomGlobalExceptionHandler, EntityNotFoundException, handling custom errors and exceptions in the application.
+## Security
+- Security components, such as JwtAuthenticationFilter, CustomUserDetailsService, JwtUtil, SecurityConfig, handling user authentication and authorization.
+## Configuration
+- Application configurations, such as application.properties, liquibase.properties, containing application settings.
+## Database Scripts
+- Initialization and update scripts for the database used by Liquibase, such as .yaml and .sql files.
+## Tests
+- Unit and integration tests, such as BookControllerTest, BookServiceTest, BookRepositoryTest, ensuring the correctness of individual components of the application.
+## Infrastructure
+- Docker configurations, such as Dockerfile, docker-compose.yml, used for running the application in Docker containers.
+## Other
+- Miscellaneous files and components, such as CoverImageValidator, EmailValidator, etc., which are part of the application.
+---
+# ⭐ Features Overview
+## Authentication Management Endpoints
+### Available for Everybody:
 🌐 POST: /api/auth/registration - registers a new user.
+
 🌐 POST: /api/auth/login - sign in for an existing user.
-Book Management Endpoints
-Administrator Available:
+## Book Management Endpoints
+### Administrator Available:
 🔑 POST: /api/books - creates a new book.
+
 🔑 PUT: /api/books/{id} - updates an existing book.
+
 🔑 DELETE: /api/books/{id} - deletes a book.
-User Available:
+## User Available:
+
 👤 GET: /api/books - retrieves all books.
+
 👤 GET: /api/books/{id} - retrieves a certain book.
+
 👤 GET: /api/books/search - search for a book with parameters.
-Category Management Endpoints
-Administrator Available:
+## Category Management Endpoints
+### Administrator Available:
 🔑 POST: /api/categories - creates a new category.
+
 🔑 PUT: /api/categories/{id} - updates an existing category.
+
 🔑 DELETE: /api/categories/{id} - deletes a category.
-User Available:
+## User Available:
 👤 GET: /api/categories - retrieves all categories.
+
 👤 GET: /api/categories/{id} - retrieves a certain category.
+
 👤 GET: /api/categories/{id}/books - provides books by category id.
-Shopping Cart Management Endpoints
-User Available:
+## Shopping Cart Management Endpoints
+### User Available:
 👤 POST: /api/cart - puts a book into the shopping cart.
+
 👤 GET: /api/cart/ - retrieves the shopping cart.
+
 👤 PUT: /api/cart/cart-items/{cartItemId} - updates the quantity of books.
+
 👤 DELETE: /api/cart/cart-items/{cartItemId} - deletes a book from the cart.
-Order Management Endpoints
-Administrator Available:
+## Order Management Endpoints
+### Administrator Available:
 🔑 PATCH: /api/orders/{id} - updates the status of the order.
-User Available:
+### User Available:
 👤 POST: /api/orders - places an order.
+
 👤 GET: /api/orders - retrieves the user's order history.
+
 👤 GET: /api/orders/{orderId}/items - provides a list of items contained in the order.
+
 👤 GET: /api/orders/{orderId}/items/{itemId} - provides an order item relying on its ID.
-📸 Screenshots
+# 📸 Screenshots
 Here are screenshots illustrating the functionality of select sample endpoints from the "Bookstore Online" project. These are just a few instances, with a comprehensive video showcasing all available endpoints further below.
 
 User Registration:
@@ -163,12 +182,12 @@ Watch the video below to learn about all the available endpoints in the "Booksto
 
 Click to watch video
 
-Description:
+# Description:
 In this video, I showcase all the available endpoints in our "Bookstore Online" application and explain how they work and what they're used for. You'll see how to register new users, log in, add and update books and categories, manage the shopping cart, place orders, and much more!
 
-🛠 Challenges Faced During Project Development
-Docker
+# 🛠 Challenges Faced During Project Development
+## Docker
 🐳 One of the primary goals of the project was to utilize containerization with Docker to facilitate environment management and ensure consistency between developer and production environments. However, during the configuration and execution of Docker containers, I encountered several issues related to environment setup and dependency management. The main causes of these problems were the lack of experience working with Docker and the need to tailor the configuration to the project's specifics.
 
-Integration Tests
+## Integration Tests
 🧪 Implementing integration tests was another challenge during the project. While these tests are a crucial element in ensuring code quality and application functionality, creating them required a significant amount of effort. I faced difficulties, especially in configuring tests, creating realistic test scenarios, and ensuring proper isolation of tests from the production environment.
