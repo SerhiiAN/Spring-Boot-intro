@@ -29,6 +29,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 @SQLRestriction(value = "is_deleted=FALSE")
 @Table(name = "users")
 public class User implements UserDetails {
+    public static final Role DEFAULT_ROLE = new Role().setName(RoleName.USER)
+            .setId(2L);
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,7 +53,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>(Set.of(DEFAULT_ROLE));
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
