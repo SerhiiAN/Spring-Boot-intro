@@ -37,8 +37,9 @@ public class OrderServiceImpl implements OrderService {
             throw new EntityNotFoundException("Cart is empty for user: " + userId);
         }
         Order order = orderMapper.cartToOrder(cart, requestDto.shippingAddress());
+        Order saveOrder = orderRepository.save(order);
         cart.clearCart();
-        return orderMapper.toOrderDto(orderRepository.save(order));
+        return orderMapper.toOrderDto(saveOrder);
     }
 
     @Transactional
